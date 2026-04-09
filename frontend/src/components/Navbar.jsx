@@ -13,7 +13,7 @@ const Navbar = () => {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/add-memory">Adicionar Memória</Link>
+          <Link to="/add-memory" className="btn">Adicionar Memória</Link>
         </li>
       </ul>
     </nav>
