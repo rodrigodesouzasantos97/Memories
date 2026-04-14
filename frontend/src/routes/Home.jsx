@@ -1,6 +1,7 @@
 import axios from "../axios-config";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import "./Home.css";
 
@@ -17,6 +18,20 @@ const Home = () => {
     getMemories();
   }, []);
 
+  const deleteMemory = async (id) => {
+    try {
+      const res = await axios.delete(`/memories/${id}`);
+      
+      const filteredMemories = memories.filter((memory) => memory._id !== id)
+      
+      setMemories(filteredMemories);
+      toast.success(res.data.msg);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.msg);
+    }
+  };
+
   return (
     <div className="home">
       <h2>Confira as últimas Memórias</h2>
@@ -32,8 +47,11 @@ const Home = () => {
               <Link className="btn" to={`/memories/${memory._id}`}>
                 Comentar
               </Link>
-              <button className="btn-delete">
-                <i class="fa-solid fa-trash"></i>
+              <button
+                className="btn-delete"
+                onClick={() => deleteMemory(memory._id)}
+              >
+                <i className="fa-solid fa-trash"></i>
               </button>
             </div>
           ))}
