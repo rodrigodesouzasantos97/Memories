@@ -163,6 +163,34 @@ const addComment = async (req, res) => {
   }
 };
 
+const deleteComment = async (req, res) => {
+  try {
+    const { memoryId, commentId } = req.params;
+
+    const memory = await Memory.findById(memoryId);
+
+    if (!memory) {
+      return res.status(404).json({ msg: "Memória não encontrada!" });
+    }
+
+    if (memory.comments.length === 0) {
+      return res.status(404).json({ msg: "Não há comentários na memória!" });
+    }
+
+    const filteredComments = memory.comments.filter(
+      (comment) => comment._id.toString() !== commentId
+    );
+
+    memory.comments = filteredComments;
+
+    await memory.save();
+
+    res.json({ msg: "Comentário excluído" });
+  } catch (error) {
+    res.status(500).send("Ocorreu um erro!");
+  }
+};
+
 module.exports = {
   createMemory,
   getMemories,
@@ -171,4 +199,5 @@ module.exports = {
   updateMemory,
   toggleFavorite,
   addComment,
+  deleteComment,
 };
