@@ -21,6 +21,7 @@
   border: 2px solid #00c6ff;
   padding: 1rem;
   border-radius: 10px;
+  position: relative;
 }
 
 .memory img {

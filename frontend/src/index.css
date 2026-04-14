@@ -17,6 +17,10 @@ a {
   text-decoration: none;
 }
 
+i {
+  pointer-events: none;
+}
+
 .btn {
   background-color: #004191;
   color: #fff;
@@ -30,8 +34,24 @@ a {
   font-size: 1rem;
 }
 
-.btn:hover {
+.btn-delete {
+  border: none;
+  transition: 0.3s;
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 3px;
+  background-color: #004191;
+  color: #fff;
+  position: absolute;
+  top: 4px;
+  left: 98%;
+  transform: translateX(-98%);
+}
+
+.btn:hover,
+.btn-delete:hover {
   background-color: #00295a;
+  color: #ccc;
 }
 
 form {
