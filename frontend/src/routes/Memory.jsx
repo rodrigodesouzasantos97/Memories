@@ -1,5 +1,5 @@
 import axios from "../axios-config";
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -50,6 +50,22 @@ const Memory = () => {
     }
   };
 
+  const deleteComment = async (commentId) => {
+    try {
+      const res = await axios.delete(`/memories/${id}/comment/${commentId}`);
+
+      const filteredComments = comments.filter(
+        (comment) => comment._id !== commentId,
+      );
+
+      setComments(filteredComments);
+      toast.success(res.data.msg);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.msg);
+    }
+  };
+
   if (!memory) return <p>Carregando...</p>;
 
   return (
@@ -86,7 +102,10 @@ const Memory = () => {
             <div className="comment" key={comment._id}>
               <p className="comment-name">{comment.name}</p>
               <p className="comment-text">{comment.text}</p>
-              <button className="btn-delete">
+              <button
+                className="btn-delete"
+                onClick={() => deleteComment(comment._id)}
+              >
                 <i className="fa-solid fa-trash"></i>
               </button>
             </div>
