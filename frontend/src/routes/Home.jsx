@@ -32,6 +32,9 @@ const Home = () => {
               <Link className="btn" to={`/memories/${memory._id}`}>
                 Comentar
               </Link>
+              <button className="btn-delete">
+                <i class="fa-solid fa-trash"></i>
+              </button>
             </div>
           ))}
       </div>

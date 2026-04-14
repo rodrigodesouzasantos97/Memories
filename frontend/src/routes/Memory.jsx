@@ -86,6 +86,9 @@ const Memory = () => {
             <div className="comment" key={comment._id}>
               <p className="comment-name">{comment.name}</p>
               <p className="comment-text">{comment.text}</p>
+              <button className="btn-delete">
+                <i class="fa-solid fa-trash"></i>
+              </button>
             </div>
           ))}
       </div>
